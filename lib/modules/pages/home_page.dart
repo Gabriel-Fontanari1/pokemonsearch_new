@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                // Lógica para buscar o Pokemon
+                //puxar a busca do pokemon
               },
               child: const Text('Buscar'),
             ),
@@ -40,5 +40,25 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       );
+  }
+}
+
+//uma gridview, para aparecer a imagem do pokemon pesquisado e o seu nome
+class PokemonCard extends StatelessWidget {
+  final String name;
+  final String imageUrl;
+
+  const PokemonCard({super.key, required this.name, required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: [
+          Image.network(imageUrl),
+          Text(name),
+        ],
+      ),
+    );
   }
 }

@@ -1,0 +1,1 @@
+//fazer a lógica para a busca de pokemons pelo id ou nome
