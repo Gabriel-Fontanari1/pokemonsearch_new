@@ -10,18 +10,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //controlador para o campo de busca
   final TextEditingController _searchController = TextEditingController();
+  //sistema de busca
   final PokemonService _pokemonService = PokemonService();
+  //lista para armazenar os dados dos pokemons
   List<Map<String, dynamic>> _pokemonList = [];
   Map<String, dynamic>? _pokemonData;
 
   Future<void> _searchPokemon() async {
     final query = _searchController.text.trim().toLowerCase();
+    //se a textbox estiver vazia, busca a lista dos 20 primeiros pokemons
     if (query.isEmpty) {
       final list = await _pokemonService.fetchPokemonList();
       setState(() {
         _pokemonList = list;
-        _pokemonData = null;
+        _pokemonData = null; //não vai ser exibido um poke especifico
       });
     } else {
       final data = await _pokemonService.fetchPokemon(query);
@@ -30,6 +34,7 @@ class _HomePageState extends State<HomePage> {
             'Pokémon não encontrado. Verifique o nome ou ID e tente novamente.');
       } else {
         setState(() {
+          //busca especifica
           _pokemonData = {
             'name': data['name'],
             'id': data['id'],
@@ -47,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                 .toList()
                 .join(', '),
           };
-          _pokemonList = [];
+          _pokemonList = []; //limpa a lista para exibir o pokemon especifico
         });
       }
     }
@@ -84,6 +89,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            //campo para a entrada do id ou nome
             TextField(
               controller: _searchController,
               decoration: const InputDecoration(
@@ -91,11 +97,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 16.0),
+            //botão para pesquisar
             ElevatedButton(
               onPressed: _searchPokemon,
               child: const Text('Pesquisar'),
             ),
             const SizedBox(height: 16.0),
+            //card para mostrar os dados do pokemon encontrado
             _pokemonData != null
                 ? Card(
                     child: Column(
@@ -119,6 +127,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   )
+                //se não for encontrado um especifoc, exibe a lista de pokemons
                 : _pokemonList.isEmpty
                     ? const Center()
                     : Expanded(
@@ -131,6 +140,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           itemCount: _pokemonList.length,
                           itemBuilder: (context, index) {
+                            //recebe o pokemon e retorna um card
                             final pokemon = _pokemonList[index];
                             return Card(
                               child: Column(
