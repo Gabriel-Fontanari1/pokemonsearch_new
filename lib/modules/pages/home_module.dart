@@ -5,7 +5,7 @@ class HomeModule extends Module {
   @override
   void binds(i) {}
 
-  @override 
+  @override
   void routes(r) {
     r.child('/', child: (context) => const HomePage());
   }

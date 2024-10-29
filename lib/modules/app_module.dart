@@ -3,11 +3,10 @@ import 'package:pokemonsearch/modules/pages/home_module.dart';
 
 class AppModule extends Module {
   @override
-  void binds(i){}
+  void binds(i) {}
 
   @override
   void routes(r) {
     r.module('/', module: HomeModule());
   }
 }
-
