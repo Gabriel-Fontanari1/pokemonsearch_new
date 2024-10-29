@@ -98,36 +98,25 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 16.0),
             _pokemonData != null
                 ? Card(
-                    margin: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.network(
-                            _pokemonData!['image'].toString(),
-                            width: 120,
-                            height: 120,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          _pokemonData!['image'].toString(),
+                          width: 100,
+                          height: 100,
+                        ),
+                        Text(
+                          _pokemonData!['name'].toString().toUpperCase(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            _pokemonData!['name'].toString().toUpperCase(),
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text('ID: ${_pokemonData!['id']}'),
-                          const SizedBox(height: 5),
-                          Text('Type: ${_pokemonData!['type']}'),
-                          const SizedBox(height: 5),
-                          Text(
-                            'Moves: ${_pokemonData!['moves']}',
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
+                        ),
+                        Text('ID: ${_pokemonData!['id']}'),
+                        Text('Type: ${_pokemonData!['type']}'),
+                        Text('Moves: ${_pokemonData!['moves']}'),
+                      ],
                     ),
                   )
                 : _pokemonList.isEmpty
@@ -136,51 +125,33 @@ class _HomePageState extends State<HomePage> {
                         child: GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 16.0,
-                            crossAxisSpacing: 16.0,
-                            childAspectRatio: 0.6,
+                            crossAxisCount: 5,
+                            mainAxisSpacing: 8.0,
+                            crossAxisSpacing: 8.0,
                           ),
                           itemCount: _pokemonList.length,
                           itemBuilder: (context, index) {
                             final pokemon = _pokemonList[index];
                             return Card(
-                              margin: const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.network(
-                                      pokemon['image'],
-                                      width: 120,
-                                      height: 120,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.network(
+                                    pokemon['image'],
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                  Text(
+                                    pokemon['name'].toUpperCase(),
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    const SizedBox(height: 8.0),
-                                    Text(
-                                      pokemon['name'].toUpperCase(),
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    const SizedBox(height: 4.0),
-                                    Text('ID: ${pokemon['id']}'),
-                                    const SizedBox(height: 4.0),
-                                    Text('Type: ${pokemon['type']}'),
-                                    const SizedBox(height: 4.0),
-                                    Expanded(
-                                      child: Text(
-                                        'Moves: ${pokemon['moves']}',
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(fontSize: 12),
-                                        overflow: TextOverflow.visible,
-                                        maxLines: 2,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  Text('ID: ${pokemon['id']}'),
+                                  Text('Type: ${pokemon['type']}'),
+                                  Text('Moves: ${pokemon['moves']}'),
+                                ],
                               ),
                             );
                           },
